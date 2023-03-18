@@ -14,8 +14,8 @@ export default async (app) => {
    */
   app
     .entry({
-      app: ['@scripts/app', '@styles/app'],
-      editor: ['@scripts/editor', '@styles/editor'],
+      app: ['@scripts/main', '@styles/index'],
+      editor: ['@scripts/editor', '@styles/index'],
     })
 
     /**
@@ -34,7 +34,7 @@ export default async (app) => {
      * Proxy origin (`WP_HOME`)
      * @see {@link https://bud.js.org/docs/bud.proxy/}
      */
-    .proxy('http://example.test')
+    .proxy('http://starter.local')
 
     /**
      * Development origin

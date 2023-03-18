@@ -4,14 +4,18 @@
 
 @include('sections.header')
 
-  <main id="main" class="main">
+  @include('partials.grid')
+
+  <main id="main" class="main" data-taxi>
     @yield('content')
   </main>
 
-  @hasSection('sidebar')
+  {{-- @hasSection('sidebar')
     <aside class="sidebar">
       @yield('sidebar')
     </aside>
-  @endif
+  @endif --}}
+
+  {{-- <div class="panel"><div class="subpanel"></div></div> --}}
 
 @include('sections.footer')

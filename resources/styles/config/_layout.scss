@@ -1,0 +1,75 @@
+@use "breakpoints" as *;
+
+$get-in-js--max-columns: '';
+$get-in-js--columns: '';
+$get-in-js--breakpoints: '';
+$get-in-js--rem: '';
+
+@each $size, $properties in $layouts {
+
+    @media screen and ( min-width: quote(map-get( $properties, 'breakpoint' )) ) {
+
+        // horizontal margin
+        .container {
+            padding-right: var(--horizontal-margin);
+            padding-left: var(--horizontal-margin);
+        }
+
+        // columns & gap
+        .grid {
+            grid-template-columns: repeat(map-get( $properties, 'columns' ), minmax(0, 1fr));
+            column-gap: map-get($properties, 'column-gap');
+        }
+
+        // scale
+        html {
+            font-size: map-get($properties, 'rem');
+        }
+
+        // variables
+        :root {
+            --max-columns: #{map-get($properties, 'max-columns')};
+            --width-of-layout: calc(100vw - var(--scrollbar-width) - (2 * var(--horizontal-margin)));
+            --horizontal-margin: #{map-get($properties, 'horizontal-margin')};
+            --gap: #{map-get($properties, 'column-gap')};
+        }
+    }
+
+    .editor-styles-wrapper[size="#{$size}"] {
+
+        // horizontal margin
+        .container {
+            margin-right: var(--horizontal-margin);
+            margin-left: var(--horizontal-margin);
+        }
+
+        // columns & gap
+        .grid {
+            grid-template-columns: repeat(map-get( $properties, 'columns' ), minmax(0, 1fr));
+            column-gap: map-get($properties, 'column-gap');
+        }
+
+        // variables
+        --max-columns: #{map-get($properties, 'max-columns')};
+        --width-of-layout: calc(100vw - var(--scrollbar-width) - (2 * var(--horizontal-margin)));
+        --horizontal-margin: #{map-get( $properties, 'horizontal-margin' )};
+        --gap: #{map-get($properties, 'column-gap')};
+
+    }
+
+    $get-in-js--max-columns: $get-in-js--max-columns + $size + '_' + map-get( $properties, 'max-columns' ) + '-';
+    $get-in-js--columns: $get-in-js--columns + $size + '_' + map-get( $properties, 'columns' ) + '-';
+    $get-in-js--breakpoints: $get-in-js--breakpoints + $size + '_' + map-get( $properties, 'breakpoint' ) + '-';
+    $get-in-js--rem: $get-in-js--rem + $size + '_' + map-get( $properties, 'rem' ) + '-';
+
+    :root {
+        --breakpoint-#{$size}: map-get( $properties, 'breakpoint' );
+    }
+}
+
+:root {
+    --get-in-js--max-columns: #{$get-in-js--max-columns};
+    --get-in-js--columns: #{$get-in-js--columns};
+    --get-in-js--breakpoints: #{$get-in-js--breakpoints};
+    --get-in-js--rem: #{$get-in-js--rem};
+}

@@ -40,7 +40,7 @@ if (! function_exists('\Roots\bootloader')) {
     );
 }
 
-\Roots\bootloader()->boot();
+\Roots\bootloader();
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +63,6 @@ collect(['setup', 'filters'])
             );
         }
     });
+
+require_once dirname(__DIR__) . '/studio-seven/studio-seven.php';
+require_once dirname(__DIR__) . '/studio-seven/app/login.php';

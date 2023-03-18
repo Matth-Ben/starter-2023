@@ -1,0 +1,14 @@
+.awards {
+    &__svg {
+        overflow: hidden;
+        transform-origin: left;
+
+        svg {
+            width: 4rem;
+            height: 3rem;
+            fill: white;
+
+            path { transform: scale(1.5); }
+        }
+    }
+} 

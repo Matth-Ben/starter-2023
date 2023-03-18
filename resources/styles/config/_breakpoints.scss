@@ -1,0 +1,103 @@
+$grid-columns: 12;
+$grid-gutter-width: 10;
+$gutter-size: $grid-gutter-width * 1px;
+
+$grid-breakpoints: (
+  xxs: 0,
+  xs: 320px,
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1440px,
+  xxxl: 1600px,
+);
+
+$container-max-widths: (
+  xs: 300px,
+  sm: 420px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1200px,
+  xxxl: 1550px,
+);
+
+@mixin media-breakpoint-up($breakpoint, $breakpoints: $grid-breakpoints) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint: map-get($breakpoints, $breakpoint);
+  }
+
+  @else {
+    @error "Unknown breakpoint #{$breakpoint}.";
+  }
+
+  @media screen and (min-width: #{$breakpoint}) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint, $breakpoints: $grid-breakpoints) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint: map-get($breakpoints, $breakpoint);
+  }
+
+  @else {
+    @error "Unknown breakpoint #{$breakpoint}.";
+  }
+
+  @media screen and (max-width: calc(#{$breakpoint} - 0.02px)) {
+    @content;
+  }
+}
+
+$layouts: (
+    's': (
+        'breakpoint': '0',
+        'horizontal-margin': 2.4rem,
+        'columns': 2, // default
+        'max-columns': 6,
+        'column-gap': 1.6rem,
+        'rem': 10px,
+    ),
+    'm': (
+        'breakpoint': '768px',
+        'horizontal-margin': 24px,
+        'columns': 2,
+        'max-columns': 8,
+        'column-gap': 1.6rem,
+        'rem': 10px
+    ),
+    'l': (
+        'breakpoint': '1024px',
+        'horizontal-margin': 40px,
+        'columns': 3,
+        'max-columns': 12,
+        'column-gap': 2.4rem,
+        'rem': 10px
+    ),
+    'xl': (
+        'breakpoint': '1280px',
+        'horizontal-margin': 60px,
+        'columns': 4,
+        'max-columns': 12,
+        'column-gap': 3.6rem,
+        'rem': 10px
+    ),
+    'xxl': (
+        'breakpoint': '1440px',
+        'horizontal-margin': 60px,
+        'columns': 4,
+        'max-columns': 12,
+        'column-gap': 3.6rem,
+        'rem': calc(1000vw / 1440)
+    ),
+    // 'xxxl': (
+    //     'breakpoint': 1440px,
+    //     'horizontal-margin': 6.4rem,
+    //     'columns': 3,
+    //     'max-columns': 12,
+    //     'column-gap': 3.2rem,
+    //     'rem': calc(1000vw / 1440)
+    // )
+);

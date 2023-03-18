@@ -1,0 +1,91 @@
+@use "./breakpoints" as *;
+
+$font-sizes: (
+    'breakpoints': ('s', 'm'),
+    'data': (
+        'h1': (
+            'selector': 'h1', // ".s-h1" est le selecteur par défaut, mais on peut spécifier d'autres sélecteurs
+            'font-size': (4rem, 8rem),
+            'line-height': (4rem, 8rem),
+            'font-weight': (400, 400),
+            'text-transform': (uppercase, uppercase),
+            'font-family': (var(--font-primary), var(--font-primary))
+        ),
+        'h2': (
+            'selector': 'h2',
+            'font-size': (3rem, 6rem),
+            'line-height': (3rem, 6rem),
+            'font-weight': (400, 400),
+            'text-transform': (uppercase, uppercase),
+            'font-family': (var(--font-primary), var(--font-primary))
+        ),
+        'h3': (
+            'selector': 'h3',
+            'font-size': (2.4rem, 4.2rem),
+            'line-height': (2.4rem, 4.2rem),
+            'font-weight': (400, 400),
+            'text-transform': (uppercase, uppercase),
+            'font-family': (var(--font-primary), var(--font-primary))
+        ),
+        'h4': (
+            'selector': 'h4',
+            'font-size': (2rem, 3.2rem),
+            'line-height': (2.4rem, 3.6rem),
+            'font-weight': (400, 400),
+            'text-transform': (uppercase, uppercase),
+            'font-family': (var(--font-primary), var(--font-primary))
+        ),
+        'h5': (
+            'selector': 'h5',
+            'font-size': (1.6rem, 2.4rem),
+            'line-height': (2rem, 2.8rem),
+            'font-weight': (400, 400),
+            'text-transform': (uppercase, uppercase),
+            'font-family': (var(--font-primary), var(--font-primary))
+        ),
+        'h6': (
+            'selector': 'h6',
+            'font-size': (1.4rem, 2rem),
+            'line-height': (1.8rem, 2.4rem),
+            'font-weight': (400, 400),
+            'text-transform': (uppercase, uppercase),
+            'font-family': (var(--font-primary), var(--font-primary))
+        )
+    )
+);
+
+$font-breakpoints: map-get( $font-sizes, 'breakpoints' );
+
+@for $i from 1 through length( $font-breakpoints ) {
+    $breakpoint: nth($font-breakpoints, $i);
+    $breakpoint: map-get(map-get($layouts, $breakpoint), 'breakpoint');
+
+    @media screen and ( min-width: $breakpoint ) {
+
+        @each $selector, $properties in map-get( $font-sizes, 'data' ) {
+
+            // Loop on properties
+            .ts-#{$selector} {
+                @each $property, $values in $properties {
+                    @if $property != 'selector' {
+                        #{$property}: #{nth($values, $i)};
+                    }
+                }
+            }
+
+            // If a selecotor is define, use it !
+            @if map-get( $properties, 'selector' ) {
+                $selector: map-get( $properties, 'selector' );
+
+                // Loop on properties
+                #{$selector} {
+                    @each $property, $values in $properties {
+                        @if $property != 'selector' {
+                            #{$property}: #{nth($values, $i)};
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+html {
+	max-width: 100%;
+	scroll-behavior: initial;
+}
+
+html,
+body {
+  min-height: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: '0px') and (max-width: '414px') {
+	html {
+		font-size: calc(100vw / 41.4) !important;
+	}
+}

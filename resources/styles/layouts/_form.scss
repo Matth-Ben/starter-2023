@@ -1,0 +1,50 @@
+label[for] {
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    border-bottom: solid 1px var(--color-dark);
+    font-weight: 300;
+    background-color: transparent;
+    border-radius: 0;
+
+    &::placeholder {
+        color: var(--color-dark);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+textarea {
+    width: 100%;
+    min-height: 14rem;
+    min-height: 1rem;
+    display: block;
+    padding: 0 0 1rem;
+    border-bottom: solid 1px var(--color-dark);
+    font-weight: 300;
+
+    &::placeholder {
+        color: var(--color-dark);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+.wpcf7-list-item {
+    margin-left: 0;
+}

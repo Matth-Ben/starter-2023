@@ -1,0 +1,9 @@
+@use "../config" as *;
+
+.info {
+    h2 {
+        color: $black;
+
+        .word { opacity: 0; }
+    } 
+}
